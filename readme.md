@@ -67,14 +67,6 @@ The lists of source and target nodes can overlap, or even be identical. If ident
     * increases the robustness of results
     * but also increases the computational time
 
-## Go
-
-How to get Go: https://golang.org/doc/install
-
-Most [Linux distributions](https://distrowatch.com) provide Go in their official repositories. For example:
-* go (Arch Linux)
-* golang (Ubuntu)
-
 ## The examples
 
 All the master sif used in these examples are adapted from pathways coming from [KEGG Pathway](http://www.genome.jp/kegg/pathway.html).
@@ -112,7 +104,15 @@ All the master sif used in these examples are adapted from pathways coming from 
     * shortest: 0
     * result: konected.sif (9 edges), also in svg for visualization
 
-# References
+## Go
+
+How to get Go: https://golang.org/doc/install
+
+Most [Linux distributions](https://distrowatch.com) provide Go in their official repositories. For example:
+* go (Arch Linux)
+* golang (Ubuntu)
+
+## References
 
 konect is inspired from [MCWalk](https://bitbucket.org/akittas/biosubg) [1].
 
