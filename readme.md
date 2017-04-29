@@ -80,6 +80,7 @@ Most [Linux distributions](https://distrowatch.com) provide Go in their official
 All the master sif used in these examples are adapted from pathways coming from [KEGG Pathway](http://www.genome.jp/kegg/pathway.html).
 
 * example 1: typical use
+    * `./konect MAPK_signaling_pathway.sif sources.txt targets.txt 100 1000000 0 1`
     * networkFile: the MAPK signaling pathway (1194 edges)
     * sourceFile: contains the nodes EGFR and IL1R1
     * targetFile: contains the nodes MAPK1 and MAPK14
@@ -90,6 +91,7 @@ All the master sif used in these examples are adapted from pathways coming from 
     * result: konected.sif (35 edges), also in svg for visualization
 
 * example 2: not only the shortest paths
+    * `./konect.go Toll_like_receptor_signaling_pathway.sif sources.txt targets.txt 100 1000000 0 0`
     * networkFile: the Toll-like receptor signaling pathway (392 edges)
     * sourceFile: contains the node MYD88
     * targetFile: contains the node TRAF6
@@ -100,6 +102,7 @@ All the master sif used in these examples are adapted from pathways coming from 
     * result: konected.sif (22 edges), also in svg for visualization
 
 * example 3: allow self connections
+    * `./konect.go cell_cycle.sif nodes.txt nodes.txt 100 1000000 1 0`
     * networkFile: the cell cycle (313 edges)
     * sourceFile: contains the node CCND1
     * targetFile: contains the node CCND1 (targetFile=sourceFile)
