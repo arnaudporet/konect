@@ -8,6 +8,7 @@ import (
     "os"
     "sort"
     "strconv"
+    "strings"
     "time"
 )
 func main() {
@@ -18,19 +19,110 @@ func main() {
         succ map[string][]string
         edges map[string]map[string]string
     )
-    if len(os.Args)!=8 {
-        fmt.Println("konect networkFile sourceFile targetFile maxStep maxWalk selfConnect shortest")
-    } else {
+    if len(os.Args)==2 && os.Args[1]=="help" {
+        fmt.Println(strings.Join([]string{
+            "",
+            "konect is a basic algorithm for connecting nodes according to a reference",
+            "network.",
+            "",
+            "Typical usage consists in extracting, from the reference network, the paths",
+            "connecting a couple of nodes belonging to it.",
+            "",
+            "konect handles networks encoded in the sif file format.",
+            "",
+            "konect does not handle multigraphs (i.e. networks with nodes connected by more",
+            "than one edge).",
+            "",
+            "Usage: konect networkFile sourceFile targetFile maxStep maxWalk selfConnect shortest",
+            "",
+            "    * networkFile: the reference network encoded in a sif file",
+            "",
+            "    * sourceFile: the source nodes listed in a txt file (one node per line)",
+            "",
+            "    * targetFile: the target nodes listed in a txt file (one node per line)",
+            "",
+            "    * maxStep: the maximum number of steps performed during a random walk to",
+            "      connect a source node to a target node",
+            "",
+            "    * maxWalk: the maximum number of random walks performed in the reference",
+            "      network to find paths from a source node to a target node",
+            "",
+            "    * selfConnect (1 or 0): when the lists of source and target nodes are not",
+            "      disjoint, allow (1) or not (0) konect to find paths connecting nodes to",
+            "      themselves",
+            "",
+            "    * shortest (1 or 0): among the found paths, select only (1) or not only (0)",
+            "      the shortest",
+            "",
+            "The returned file is a sif file encoding a subnetwork of the reference network",
+            "connecting the source nodes to the target nodes.",
+            "",
+            "The lists of source and target nodes can overlap, or even be identical. If",
+            "identical, selfConnect must be 1.",
+            "",
+            "For more information: https://github.com/arnaudporet/konect",
+            "",
+        },"\n"))
+    } else if len(os.Args)==2 && os.Args[1]=="license" {
+        fmt.Println(strings.Join([]string{
+            "",
+            "Copyright 2017 Arnaud Poret",
+            "",
+            "Redistribution and use in source and binary forms, with or without modification,",
+            "are permitted provided that the following conditions are met:",
+            "",
+            "1. Redistributions of source code must retain the above copyright notice, this",
+            "   list of conditions and the following disclaimer.",
+            "",
+            "2. Redistributions in binary form must reproduce the above copyright notice,",
+            "   this list of conditions and the following disclaimer in the documentation",
+            "   and/or other materials provided with the distribution.",
+            "",
+            "THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND",
+            "ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED",
+            "WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE",
+            "DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR",
+            "ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES",
+            "(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;",
+            "LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON",
+            "ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT",
+            "(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS",
+            "SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+            "",
+        },"\n"))
+    } else if len(os.Args)==2 && os.Args[1]=="usage" {
+        fmt.Println(strings.Join([]string{
+            "",
+            "konect networkFile sourceFile targetFile maxStep maxWalk selfConnect shortest",
+            "",
+        },"\n"))
+    } else if len(os.Args)==8 {
+        selfConnect,_=strconv.ParseInt(os.Args[6],10,0)
+        shortest,_=strconv.ParseInt(os.Args[7],10,0)
+        if int(selfConnect)!=0 && int(selfConnect)!=1 {
+            panic("selfConnect must be 1 or 0")
+        }
+        if int(shortest)!=0 && int(shortest)!=1 {
+            panic("shortest must be 1 or 0")
+        }
         rand.Seed(int64(time.Now().Nanosecond()))
         succ,edges=ReadNetwork(os.Args[1])
         sources=ReadNodes(os.Args[2],succ)
         targets=ReadNodes(os.Args[3],succ)
         maxStep,_=strconv.ParseInt(os.Args[4],10,0)
         maxWalk,_=strconv.ParseInt(os.Args[5],10,0)
-        selfConnect,_=strconv.ParseInt(os.Args[6],10,0)
-        shortest,_=strconv.ParseInt(os.Args[7],10,0)
         allPaths=FindAllPaths(sources,targets,int(maxStep),int(maxWalk),int(selfConnect),int(shortest),succ)
         WriteNetwork("konected.sif",allPaths,edges)
+    } else {
+        fmt.Println(strings.Join([]string{
+            "",
+            "To print help:        konect help",
+            "To print license:     konect license",
+            "To print usage:       konect usage",
+            "",
+            "For more information: https://github.com/arnaudporet/konect",
+            "",
+        },"\n"))
     }
 }
 func CopyPath(path []string) []string {
@@ -157,6 +249,7 @@ func RandomWalk(source,target string,maxStep int,succ map[string][]string) []str
 }
 func ReadNetwork(networkFile string) (map[string][]string,map[string]map[string]string) {
     var (
+        err error
         node string
         line []string
         lines [][]string
@@ -174,7 +267,11 @@ func ReadNetwork(networkFile string) (map[string][]string,map[string]map[string]
     reader.FieldsPerRecord=3
     reader.LazyQuotes=false
     reader.TrimLeadingSpace=true
-    lines,_=reader.ReadAll()
+    lines,err=reader.ReadAll()
+    if err!=nil {
+        fmt.Println("\nERROR: "+err.Error()+"\n")
+        panic(networkFile+" is not properly formated")
+    }
     succ=make(map[string][]string)
     edges=make(map[string]map[string]string)
     for _,line=range lines {
@@ -191,6 +288,7 @@ func ReadNetwork(networkFile string) (map[string][]string,map[string]map[string]
 }
 func ReadNodes(nodeFile string,succ map[string][]string) []string {
     var (
+        err error
         nodes,line []string
         lines [][]string
         reader *csv.Reader
@@ -206,6 +304,10 @@ func ReadNodes(nodeFile string,succ map[string][]string) []string {
     reader.LazyQuotes=false
     reader.TrimLeadingSpace=true
     lines,_=reader.ReadAll()
+    if err!=nil {
+        fmt.Println("\nERROR: "+err.Error()+"\n")
+        panic(nodeFile+" is not properly formated")
+    }
     for _,line=range lines {
         if !IsInPath(nodes,line[0]) && IsInSucc(succ,line[0]) {
             nodes=append(nodes,line[0])

@@ -26,7 +26,7 @@ Note that the separators are tabulations `\t`: the sif file format is the tab-se
 For example, the edge representing the activation of RAF1 by HRAS is a line of a sif file encoded as follow:
 * `HRAS \t activation \t RAF1`
 
-## Usages
+## Usage
 
 In a terminal emulator:
 1. `go build konect.go`
@@ -37,7 +37,7 @@ or simply
 
 Note that `go run` build konect each time before running it.
 
-The Go package can have different names depending on your OS/Linux distributions. For example, with [Ubuntu](https://www.ubuntu.com/), the Go package is named golang: running a Go file with Ubuntu might be `golang-go run yourfile.go` instead of `go run yourfile.go` with [Arch Linux](https://www.archlinux.org).
+The Go package can have different names depending on your OS/Linux distribution. For example, with [Ubuntu](https://www.ubuntu.com/), the Go package is named golang: running a Go file with Ubuntu might be `golang-go run yourfile.go` instead of `go run yourfile.go` with [Arch Linux](https://www.archlinux.org).
 
 Arguments:
 * `networkFile`: the master network encoded in a sif file (see above)
@@ -45,10 +45,8 @@ Arguments:
 * `targetFile`: the target nodes listed in a txt file (one node per line)
 * `maxStep`: the maximum number of steps performed during a random walk to connect a source node to a target node
 * `maxWalk`: the maximum number of random walks performed in the master network to find paths from a source node to a target node
-* `selfConnect` (`1` or `0`): when the list of source and target nodes are not disjoint, allow `1` or not `0` konect to find paths connecting nodes to themselves
+* `selfConnect` (`1` or `0`): when the lists of source and target nodes are not disjoint, allow `1` or not `0` konect to find paths connecting nodes to themselves
 * `shortest` (`1` or `0`): among the found paths, select only `1` or not only `0` the shortest
-
-To make konect printing the required arguments, just run konect without any argument.
 
 The returned file is a sif file encoding a subnetwork of the master network connecting the source nodes to the target nodes.
 
