@@ -102,6 +102,10 @@ All the master sif used in these examples are adapted from pathways coming from 
     * shortest: 0
     * result: konected.sif (9 edges), also in svg for visualization
 
+## Forthcoming
+
+* improving the code
+
 ## Go
 
 How to get Go: https://golang.org/doc/install
