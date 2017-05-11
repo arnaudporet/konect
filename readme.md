@@ -14,7 +14,7 @@ Typical usage consists in extracting, from the master network, the paths connect
 
 konect handles networks encoded in the sif file format (see below): the provided master network must be encoded in the sif file format.
 
-Together with the master network encoded in a sif file, konect requires the nodes to be connected be listed in txt files.
+Together with the master network encoded in a sif file, konect requires the nodes to connect be listed in txt files (see below).
 
 ## The sif file format
 
@@ -43,10 +43,10 @@ Arguments:
 * `networkFile`: the master network encoded in a sif file (see above)
 * `sourceFile`: the source nodes listed in a txt file (one node per line)
 * `targetFile`: the target nodes listed in a txt file (one node per line)
-* `maxStep`: the maximum number of steps performed during a random walk to connect a source node to a target node
+* `maxStep`: the maximum number of steps performed during a random walk starting from a source node in an attempt to reach a target node
 * `maxWalk`: the maximum number of random walks performed in the master network to find paths from a source node to a target node
-* `selfConnect` (`1` or `0`): when the lists of source and target nodes are not disjoint, allow `1` or not `0` konect to find paths connecting nodes to themselves
-* `shortest` (`1` or `0`): among the found paths, select only `1` or not only `0` the shortest
+* `selfConnect` (`1` or `0`): allow `1` or not `0` konect to find paths connecting a node to itself if it belongs to both the source and target nodes
+* `shortest` (`1` or `0`): among the found connecting paths, select only `1` or not only `0` the shortest
 
 The returned file is a sif file encoding a subnetwork of the master network connecting the source nodes to the target nodes.
 
@@ -56,20 +56,20 @@ The lists of source and target nodes can overlap, or even be identical. If ident
 
 * konect does not handle multigraphs (i.e. networks with nodes connected by more than one edge)
 * the master network must be provided as a sif file (see above)
-* in the txt files containing the node lists: one node per line
+* in the txt files containing the node lists (see above): one node per line
 * since konect uses random walks:
-    * results can be different between identical runs
+    * the results can be different between identical runs
     * returning all the possible connecting paths is not guaranteed
 * setting `selfConnect` at `1` and/or `shortest` at `0` can greatly increase the size of the returned network
 * increasing `maxWalk`:
-    * increases the robustness of results
+    * increases the robustness of the results
     * but also increases the computational time
 
 ## The examples
 
 All the master sif used in these examples are adapted from pathways coming from [KEGG Pathway](http://www.genome.jp/kegg/pathway.html).
 
-* example 1: typical use
+* example 1: typical usage
     * `./konect MAPK_signaling_pathway.sif sources.txt targets.txt 100 1000000 0 1`
     * networkFile: the MAPK signaling pathway (1194 edges)
     * sourceFile: contains the nodes EGFR and IL1R1

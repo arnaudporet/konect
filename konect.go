@@ -41,18 +41,17 @@ func main() {
             "",
             "    * targetFile: the target nodes listed in a txt file (one node per line)",
             "",
-            "    * maxStep: the maximum number of steps performed during a random walk to",
-            "      connect a source node to a target node",
+            "    * maxStep: the maximum number of steps performed during a random walk",
+            "      starting from a source node in an attempt to reach a target node",
             "",
             "    * maxWalk: the maximum number of random walks performed in the reference",
             "      network to find paths from a source node to a target node",
             "",
-            "    * selfConnect (1 or 0): when the lists of source and target nodes are not",
-            "      disjoint, allow (1) or not (0) konect to find paths connecting nodes to",
-            "      themselves",
+            "    * selfConnect (1 or 0): allow (1) or not (0) konect to find paths connecting",
+            "      a node to itself if it belongs to both the source and target nodes",
             "",
-            "    * shortest (1 or 0): among the found paths, select only (1) or not only (0)",
-            "      the shortest",
+            "    * shortest (1 or 0): among the found connecting paths, select only (1) or",
+            "      not only (0) the shortest",
             "",
             "The returned file is a sif file encoding a subnetwork of the reference network",
             "connecting the source nodes to the target nodes.",
@@ -97,20 +96,26 @@ func main() {
             "",
         },"\n"))
     } else if len(os.Args)==8 {
-        selfConnect,_=strconv.ParseInt(os.Args[6],10,0)
         shortest,_=strconv.ParseInt(os.Args[7],10,0)
+        selfConnect,_=strconv.ParseInt(os.Args[6],10,0)
+        maxWalk,_=strconv.ParseInt(os.Args[5],10,0)
+        maxStep,_=strconv.ParseInt(os.Args[4],10,0)
+        if int(shortest)!=0 && int(shortest)!=1 {
+            panic("shortest must be 1 or 0")
+        }
         if int(selfConnect)!=0 && int(selfConnect)!=1 {
             panic("selfConnect must be 1 or 0")
         }
-        if int(shortest)!=0 && int(shortest)!=1 {
-            panic("shortest must be 1 or 0")
+        if int(maxWalk)<1 {
+            panic("maxWalk must 1 or more")
+        }
+        if int(maxStep)<1 {
+            panic("maxStep must 1 or more")
         }
         rand.Seed(int64(time.Now().Nanosecond()))
         succ,edges=ReadNetwork(os.Args[1])
         sources=ReadNodes(os.Args[2],succ)
         targets=ReadNodes(os.Args[3],succ)
-        maxStep,_=strconv.ParseInt(os.Args[4],10,0)
-        maxWalk,_=strconv.ParseInt(os.Args[5],10,0)
         allPaths=FindAllPaths(sources,targets,int(maxStep),int(maxWalk),int(selfConnect),int(shortest),succ)
         WriteNetwork("konected.sif",allPaths,edges)
     } else {
@@ -172,15 +177,6 @@ func FindPaths(source,target string,maxStep,maxWalk int,succ map[string][]string
     }
     sort.Slice(paths,func(i,j int) bool {return len(paths[i])<len(paths[j])})
     return paths
-}
-func IsInEdges(edges map[string]map[string]string,thatSource string) bool {
-    var source string
-    for source=range edges {
-        if source==thatSource {
-            return true
-        }
-    }
-    return false
 }
 func IsInPath(path []string,thatNode string) bool {
     var node string
@@ -288,7 +284,6 @@ func ReadNetwork(networkFile string) (map[string][]string,map[string]map[string]
 }
 func ReadNodes(nodeFile string,succ map[string][]string) []string {
     var (
-        err error
         nodes,line []string
         lines [][]string
         reader *csv.Reader
@@ -304,10 +299,6 @@ func ReadNodes(nodeFile string,succ map[string][]string) []string {
     reader.LazyQuotes=false
     reader.TrimLeadingSpace=true
     lines,_=reader.ReadAll()
-    if err!=nil {
-        fmt.Println("\nERROR: "+err.Error()+"\n")
-        panic(nodeFile+" is not properly formated")
-    }
     for _,line=range lines {
         if !IsInPath(nodes,line[0]) && IsInSucc(succ,line[0]) {
             nodes=append(nodes,line[0])
