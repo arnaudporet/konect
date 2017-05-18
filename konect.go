@@ -13,7 +13,7 @@ import (
 )
 func main() {
     var (
-        maxStep,maxWalk,selfConnect,shortest int64
+        maxStep,maxWalk,shortest int64
         sources,targets []string
         allPaths [][]string
         succ map[string][]string
@@ -33,13 +33,13 @@ func main() {
             "konect does not handle multigraphs (i.e. networks with nodes connected by more",
             "than one edge).",
             "",
-            "Usage: konect networkFile sourceFile targetFile maxStep maxWalk selfConnect shortest",
+            "Usage: konect networkFile sourceFile targetFile maxStep maxWalk shortest",
             "",
             "    * networkFile: the reference network encoded in a sif file",
             "",
-            "    * sourceFile: the source nodes listed in a txt file (one node per line)",
+            "    * sourceFile: the source nodes listed in a csv file (one node per line)",
             "",
-            "    * targetFile: the target nodes listed in a txt file (one node per line)",
+            "    * targetFile: the target nodes listed in a csv file (one node per line)",
             "",
             "    * maxStep: the maximum number of steps performed during a random walk",
             "      starting from a source node in an attempt to reach a target node",
@@ -47,17 +47,11 @@ func main() {
             "    * maxWalk: the maximum number of random walks performed in the reference",
             "      network to find paths from a source node to a target node",
             "",
-            "    * selfConnect (1 or 0): allow (1) or not (0) konect to find paths connecting",
-            "      a node to itself if it belongs to both the source and target nodes",
-            "",
             "    * shortest (1 or 0): among the found connecting paths, select only (1) or",
             "      not only (0) the shortest",
             "",
             "The returned file is a sif file encoding a subnetwork of the reference network",
             "connecting the source nodes to the target nodes.",
-            "",
-            "The lists of source and target nodes can overlap, or even be identical. If",
-            "identical, selfConnect must be 1.",
             "",
             "For more information: https://github.com/arnaudporet/konect",
             "",
@@ -92,19 +86,15 @@ func main() {
     } else if len(os.Args)==2 && os.Args[1]=="usage" {
         fmt.Println(strings.Join([]string{
             "",
-            "konect networkFile sourceFile targetFile maxStep maxWalk selfConnect shortest",
+            "konect networkFile sourceFile targetFile maxStep maxWalk shortest",
             "",
         },"\n"))
-    } else if len(os.Args)==8 {
-        shortest,_=strconv.ParseInt(os.Args[7],10,0)
-        selfConnect,_=strconv.ParseInt(os.Args[6],10,0)
+    } else if len(os.Args)==7 {
+        shortest,_=strconv.ParseInt(os.Args[6],10,0)
         maxWalk,_=strconv.ParseInt(os.Args[5],10,0)
         maxStep,_=strconv.ParseInt(os.Args[4],10,0)
         if int(shortest)!=0 && int(shortest)!=1 {
             panic("shortest must be 1 or 0")
-        }
-        if int(selfConnect)!=0 && int(selfConnect)!=1 {
-            panic("selfConnect must be 1 or 0")
         }
         if int(maxWalk)<1 {
             panic("maxWalk must 1 or more")
@@ -116,7 +106,7 @@ func main() {
         succ,edges=ReadNetwork(os.Args[1])
         sources=ReadNodes(os.Args[2],succ)
         targets=ReadNodes(os.Args[3],succ)
-        allPaths=FindAllPaths(sources,targets,int(maxStep),int(maxWalk),int(selfConnect),int(shortest),succ)
+        allPaths=FindAllPaths(sources,targets,int(maxStep),int(maxWalk),int(shortest),succ)
         WriteNetwork("konected.sif",allPaths,edges)
     } else {
         fmt.Println(strings.Join([]string{
@@ -136,27 +126,27 @@ func CopyPath(path []string) []string {
     copy(y,path)
     return y
 }
-func FindAllPaths(sources,targets []string,maxStep,maxWalk,selfConnect,shortest int,succ map[string][]string) [][]string {
+func FindAllPaths(sources,targets []string,maxStep,maxWalk,shortest int,succ map[string][]string) [][]string {
     var (
         i1,i2,i3,imax int
-        tail string
+        tail1,tail2 string
         paths,allPaths [][]string
     )
-    tail="/"+strconv.FormatInt(int64(len(sources)),10)+")"
+    tail1="/"+strconv.FormatInt(int64(len(sources)),10)+")"
+    tail2="/"+strconv.FormatInt(int64(len(targets)),10)+")"
     for i1=range sources {
-        fmt.Println("Sourcing "+sources[i1]+" ("+strconv.FormatInt(int64(i1+1),10)+tail)
+        fmt.Println("Sourcing "+sources[i1]+" ("+strconv.FormatInt(int64(i1+1),10)+tail1)
         for i2=range targets {
-            if (selfConnect==1) || (sources[i1]!=targets[i2]) {
-                paths=FindPaths(sources[i1],targets[i2],maxStep,maxWalk,succ)
-                if shortest==1 {
-                    imax=sort.Search(len(paths),func(i int) bool {return len(paths[i])>len(paths[0])})
-                } else {
-                    imax=len(paths)
-                }
-                for i3=0;i3<imax;i3++ {
-                    if !IsInPaths(allPaths,paths[i3]) {
-                        allPaths=append(allPaths,CopyPath(paths[i3]))
-                    }
+            fmt.Println("    Targeting "+targets[i2]+" ("+strconv.FormatInt(int64(i2+1),10)+tail2)
+            paths=FindPaths(sources[i1],targets[i2],maxStep,maxWalk,succ)
+            if shortest==1 {
+                imax=sort.Search(len(paths),func(i int) bool {return len(paths[i])>len(paths[0])})
+            } else {
+                imax=len(paths)
+            }
+            for i3=0;i3<imax;i3++ {
+                if !IsInPaths(allPaths,paths[i3]) {
+                    allPaths=append(allPaths,CopyPath(paths[i3]))
                 }
             }
         }
@@ -284,6 +274,7 @@ func ReadNetwork(networkFile string) (map[string][]string,map[string]map[string]
 }
 func ReadNodes(nodeFile string,succ map[string][]string) []string {
     var (
+        err error
         nodes,line []string
         lines [][]string
         reader *csv.Reader
@@ -298,7 +289,11 @@ func ReadNodes(nodeFile string,succ map[string][]string) []string {
     reader.FieldsPerRecord=1
     reader.LazyQuotes=false
     reader.TrimLeadingSpace=true
-    lines,_=reader.ReadAll()
+    lines,err=reader.ReadAll()
+    if err!=nil {
+        fmt.Println("\nERROR: "+err.Error()+"\n")
+        panic(nodeFile+" is not properly formated")
+    }
     for _,line=range lines {
         if !IsInPath(nodes,line[0]) && IsInSucc(succ,line[0]) {
             nodes=append(nodes,line[0])

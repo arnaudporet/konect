@@ -69,7 +69,7 @@
       <rect x="5" width="643" height="514" y="-15" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g id="y.node.0">
-      <g fill="rgb(255,204,153)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,153)">
+      <g fill="lime" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="lime">
         <rect x="482.7577" y="111" width="46.1211" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
@@ -80,15 +80,25 @@
     </g>
     <g id="y.node.1">
       <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
-        <rect x="559.389" y="172" width="46.0332" rx="4" ry="4" height="30" stroke="none"/>
+        <rect x="405.0602" y="172" width="47.1875" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
         <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="566.389" xml:space="preserve" y="191.1543" stroke="none">KRAS</text>
+          <text x="412.0602" xml:space="preserve" y="191.1543" stroke="none">HRAS</text>
         </g>
       </g>
     </g>
     <g id="y.node.2">
+      <g fill="lime" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="lime">
+        <rect x="313.4538" y="361" width="55.3027" rx="4" ry="4" height="30" stroke="none"/>
+      </g>
+      <g>
+        <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+          <text x="320.4538" xml:space="preserve" y="380.1543" stroke="none">MAPK1</text>
+        </g>
+      </g>
+    </g>
+    <g id="y.node.3">
       <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
         <rect x="482.2479" y="172" width="47.1406" rx="4" ry="4" height="30" stroke="none"/>
       </g>
@@ -98,43 +108,33 @@
         </g>
       </g>
     </g>
-    <g id="y.node.3">
-      <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
-        <rect x="405.0602" y="172" width="47.1875" rx="4" ry="4" height="30" stroke="none"/>
-      </g>
-      <g>
-        <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="412.0602" xml:space="preserve" y="191.1543" stroke="none">HRAS</text>
-        </g>
-      </g>
-    </g>
     <g id="y.node.4">
-      <g fill="rgb(255,204,153)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,153)">
-        <rect x="313.4538" y="361" width="55.3027" rx="4" ry="4" height="30" stroke="none"/>
+      <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
+        <rect x="559.389" y="172" width="46.0332" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
         <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="320.4538" xml:space="preserve" y="380.1543" stroke="none">MAPK1</text>
+          <text x="566.389" xml:space="preserve" y="191.1543" stroke="none">KRAS</text>
         </g>
       </g>
     </g>
     <g id="y.node.5">
-      <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
-        <rect x="569.3622" y="361" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
-      </g>
-      <g>
-        <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="576.3622" xml:space="preserve" y="380.1543" stroke="none">MAPK10</text>
-        </g>
-      </g>
-    </g>
-    <g id="y.node.6">
       <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
         <rect x="398.7566" y="361" width="55.3027" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
         <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
           <text x="405.7566" xml:space="preserve" y="380.1543" stroke="none">MAPK9</text>
+        </g>
+      </g>
+    </g>
+    <g id="y.node.6">
+      <g fill="lime" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="lime">
+        <rect x="252.8447" y="454" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
+      </g>
+      <g>
+        <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+          <text x="259.8448" xml:space="preserve" y="473.1543" stroke="none">MAPK14</text>
         </g>
       </g>
     </g>
@@ -149,17 +149,17 @@
       </g>
     </g>
     <g id="y.node.8">
-      <g fill="rgb(255,204,153)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,153)">
-        <rect x="252.8447" y="454" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
+      <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
+        <rect x="569.3622" y="361" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
         <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="259.8448" xml:space="preserve" y="473.1543" stroke="none">MAPK14</text>
+          <text x="576.3622" xml:space="preserve" y="380.1543" stroke="none">MAPK10</text>
         </g>
       </g>
     </g>
     <g id="y.node.9">
-      <g fill="rgb(255,204,153)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,153)">
+      <g fill="lime" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="lime">
         <rect x="123.8177" y="0" width="47.832" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
@@ -190,26 +190,6 @@
     </g>
     <g id="y.node.12">
       <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
-        <rect x="40.9793" y="172" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
-      </g>
-      <g>
-        <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="47.9793" xml:space="preserve" y="191.1543" stroke="none">MAP3K1</text>
-        </g>
-      </g>
-    </g>
-    <g id="y.node.13">
-      <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
-        <rect x="125.2591" y="111" width="44.9492" rx="4" ry="4" height="30" stroke="none"/>
-      </g>
-      <g>
-        <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="132.2591" xml:space="preserve" y="130.1543" stroke="none">PAK2</text>
-        </g>
-      </g>
-    </g>
-    <g id="y.node.14">
-      <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
         <rect x="312.1225" y="172" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
@@ -218,13 +198,33 @@
         </g>
       </g>
     </g>
-    <g id="y.node.15">
+    <g id="y.node.13">
       <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
         <rect x="219.1848" y="172" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
         <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
           <text x="226.1848" xml:space="preserve" y="191.1543" stroke="none">MAP2K2</text>
+        </g>
+      </g>
+    </g>
+    <g id="y.node.14">
+      <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
+        <rect x="40.9793" y="172" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
+      </g>
+      <g>
+        <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+          <text x="47.9793" xml:space="preserve" y="191.1543" stroke="none">MAP3K1</text>
+        </g>
+      </g>
+    </g>
+    <g id="y.node.15">
+      <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
+        <rect x="205.8757" y="361" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
+      </g>
+      <g>
+        <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+          <text x="212.8757" xml:space="preserve" y="380.1543" stroke="none">MAP2K6</text>
         </g>
       </g>
     </g>
@@ -244,17 +244,17 @@
       </g>
       <g>
         <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="119.938" xml:space="preserve" y="380.1543" stroke="none">MAP2K6</text>
+          <text x="119.938" xml:space="preserve" y="380.1543" stroke="none">MAP2K3</text>
         </g>
       </g>
     </g>
     <g id="y.node.18">
       <g fill="rgb(204,153,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,153,255)">
-        <rect x="205.8757" y="361" width="62.9375" rx="4" ry="4" height="30" stroke="none"/>
+        <rect x="125.2591" y="111" width="44.9492" rx="4" ry="4" height="30" stroke="none"/>
       </g>
       <g>
         <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="212.8757" xml:space="preserve" y="380.1543" stroke="none">MAP2K4</text>
+          <text x="132.2591" xml:space="preserve" y="130.1543" stroke="none">PAK2</text>
         </g>
       </g>
     </g>
@@ -264,118 +264,118 @@
       </g>
       <g>
         <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-          <text x="27.0003" xml:space="preserve" y="380.1543" stroke="none">MAP2K3</text>
+          <text x="27.0003" xml:space="preserve" y="380.1543" stroke="none">MAP2K4</text>
         </g>
       </g>
     </g>
     <g onmouseout="HideTooltip(evt)" id="y.edge.0" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M521.192 141 L521.192 156.5 L582.4056 156.5 L582.4056 163.9697"/>
-      </g>
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path d="M582.4056 171.9697 L587.4056 159.9697 L582.4056 162.9697 L577.4056 159.9697 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.1" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M505.8183 141 L505.8183 163.9697"/>
-        <path d="M505.8183 171.9697 L510.8183 159.9697 L505.8183 162.9697 L500.8183 159.9697 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.2" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M490.4445 141 L490.4445 156.5 L428.654 156.5 L428.654 163.9697"/>
+      </g>
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path d="M428.654 171.9697 L433.654 159.9697 L428.654 162.9697 L423.654 159.9697 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.3" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M565.1431 202 L565.1431 281.5 L363.2263 281.5 L363.2263 352.9612"/>
-        <path d="M363.2263 360.9612 L368.2263 348.9612 L363.2263 351.9612 L358.2263 348.9612 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.7" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M488.1405 202 L488.1405 265.5 L352.1657 265.5 L352.1657 352.9534"/>
-        <path d="M352.1657 360.9534 L357.1657 348.9534 L352.1657 351.9534 L347.1657 348.9534 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.11" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.1" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M410.9586 202 L410.9586 233.5 L341.1052 233.5 L341.1052 352.9689"/>
         <path d="M341.1052 360.9689 L346.1052 348.9689 L341.1052 351.9689 L336.1052 348.9689 Z" stroke="none"/>
       </g>
     </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.2" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M505.8183 141 L505.8183 163.9697"/>
+        <path d="M505.8183 171.9697 L510.8183 159.9697 L505.8183 162.9697 L500.8183 159.9697 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.3" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M488.1405 202 L488.1405 265.5 L352.1657 265.5 L352.1657 352.9534"/>
+        <path d="M352.1657 360.9534 L357.1657 348.9534 L352.1657 351.9534 L347.1657 348.9534 Z" stroke="none"/>
+      </g>
+    </g>
     <g onmouseout="HideTooltip(evt)" id="y.edge.4" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M599.668 202 L599.668 217.5 L621.8101 217.5 L621.8101 352.965"/>
-        <path d="M621.8101 360.965 L626.8101 348.965 L621.8101 351.965 L616.8101 348.965 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.10" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M523.496 202 L523.496 233.5 L560.1431 233.5 M570.1431 233.5 L600.8309 233.5 L600.8309 352.9689"/>
-        <path d="M600.8309 360.9689 L605.8309 348.9689 L600.8309 351.9689 L595.8309 348.9689 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.14" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M446.3493 202 L446.3493 260.5 M446.3493 270.5 L446.3493 276.5 M446.3493 286.5 L446.3493 313.5 L579.8518 313.5 L579.8518 352.9536"/>
-        <path d="M579.8518 360.9536 L584.8518 348.9536 L579.8518 351.9536 L574.8518 348.9536 Z" stroke="none"/>
+        <path fill="none" d="M521.192 141 L521.192 156.5 L582.4056 156.5 L582.4056 163.9697"/>
+        <path d="M582.4056 171.9697 L587.4056 159.9697 L582.4056 162.9697 L577.4056 159.9697 Z" stroke="none"/>
       </g>
     </g>
     <g onmouseout="HideTooltip(evt)" id="y.edge.5" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M576.6514 202 L576.6514 228.5 M576.6514 238.5 L576.6514 308.5 M576.6514 318.5 L576.6514 345.5 L444.8422 345.5 L444.8422 352.9697"/>
-        <path d="M444.8422 360.9697 L449.8422 348.9697 L444.8422 351.9697 L439.8422 348.9697 Z" stroke="none"/>
+        <path fill="none" d="M565.1431 202 L565.1431 281.5 L363.2263 281.5 L363.2263 352.9612"/>
+        <path d="M363.2263 360.9612 L368.2263 348.9612 L363.2263 351.9612 L358.2263 348.9612 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.8" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M499.9257 202 L499.9257 276.5 M499.9257 286.5 L499.9257 297.5 L451.3493 297.5 M441.3493 297.5 L426.4079 297.5 L426.4079 352.969"/>
-        <path d="M426.4079 360.969 L431.4079 348.969 L426.4079 351.969 L421.4079 348.969 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.12" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.6" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M422.7555 202 L422.7555 249.5 L407.9737 249.5 L407.9737 260.5 M407.9737 270.5 L407.9737 276.5 M407.9737 286.5 L407.9737 352.9728"/>
         <path d="M407.9737 360.9728 L412.9737 348.9728 L407.9737 351.9728 L402.9737 348.9728 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.6" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.16" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M588.1597 202 L588.1597 228.5 M588.1597 238.5 L588.1597 297.5 L581.6514 297.5 M571.6514 297.5 L530.145 297.5 L530.145 308.5 M530.145 318.5 L530.145 340.5 M530.145 350.5 L530.145 352.969"/>
-        <path d="M530.145 360.969 L535.145 348.969 L530.145 351.969 L525.145 348.969 Z" stroke="none"/>
+        <path fill="none" d="M576.6514 202 L576.6514 345.5 L444.8422 345.5 L444.8422 352.9697"/>
+        <path d="M444.8422 360.9697 L449.8422 348.9697 L444.8422 351.9697 L439.8422 348.9697 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.9" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.17" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M511.7108 202 L511.7108 276.5 M511.7108 286.5 L511.7108 308.5 M511.7108 318.5 L511.7107 340.5 M511.7107 350.5 L511.7107 352.9612"/>
-        <path d="M511.7107 360.9612 L516.7107 348.9612 L511.7107 351.9612 L506.7107 348.9612 Z" stroke="none"/>
+        <path fill="none" d="M499.9257 202 L499.9257 276.5 M499.9257 286.5 L499.9257 297.5 L426.4079 297.5 L426.4079 352.969"/>
+        <path d="M426.4079 360.969 L431.4079 348.969 L426.4079 351.969 L421.4079 348.969 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.13" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M434.5524 202 L434.5524 260.5 M434.5524 270.5 L434.5524 276.5 M434.5524 286.5 L434.5524 292.5 M434.5524 302.5 L434.5524 329.5 L493.2765 329.5 L493.2765 340.5 M493.2765 350.5 L493.2765 352.9692"/>
-        <path d="M493.2765 360.9692 L498.2765 348.9692 L493.2765 351.9692 L488.2765 348.9692 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.15" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.7" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M426.4079 391 L426.4079 406.5 L293.3046 406.5 L293.3046 445.9536"/>
         <path d="M293.3046 453.9536 L298.3046 441.9536 L293.3046 444.9536 L288.3046 441.9536 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.16" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.8" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M600.8309 391 L600.8309 438.5 L311.2867 438.5 L311.2867 445.9697"/>
-        <path d="M311.2867 453.9697 L316.2867 441.9697 L311.2867 444.9697 L306.2867 441.9697 Z" stroke="none"/>
+        <path fill="none" d="M511.7108 202 L511.7108 276.5 M511.7108 286.5 L511.7107 340.5 M511.7107 350.5 L511.7107 352.9612"/>
+        <path d="M511.7107 360.9612 L516.7107 348.9612 L511.7107 351.9612 L506.7107 348.9612 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.17" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.10" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M588.1597 202 L588.1597 297.5 L581.6514 297.5 M571.6514 297.5 L530.145 297.5 L530.145 340.5 M530.145 350.5 L530.145 352.969"/>
+        <path d="M530.145 360.969 L535.145 348.969 L530.145 351.969 L525.145 348.969 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.15" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M434.5524 202 L434.5524 260.5 M434.5524 270.5 L434.5524 276.5 M434.5524 286.5 L434.5524 292.5 M434.5524 302.5 L434.5524 329.5 L493.2765 329.5 L493.2765 340.5 M493.2765 350.5 L493.2765 352.9692"/>
+        <path d="M493.2765 360.9692 L498.2765 348.9692 L493.2765 351.9692 L488.2765 348.9692 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.9" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M511.7107 391 L511.7107 422.5 L302.2956 422.5 L302.2956 445.9692"/>
         <path d="M302.2956 453.9692 L307.2956 441.9692 L302.2956 444.9692 L297.2956 441.9692 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.11" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M446.3493 202 L446.3493 260.5 M446.3493 270.5 L446.3493 276.5 M446.3493 286.5 L446.3493 292.5 M446.3493 302.5 L446.3493 313.5 L506.7108 313.5 M516.7108 313.5 L525.145 313.5 M535.145 313.5 L571.6514 313.5 M579.8518 313.5 L579.8518 313.5 L579.8518 352.9536"/>
+        <path d="M579.8518 360.9536 L584.8518 348.9536 L579.8518 351.9536 L574.8518 348.9536 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.13" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M523.496 202 L523.496 233.5 L560.1431 233.5 M570.1431 233.5 L571.6514 233.5 M581.6514 233.5 L583.1597 233.5 M593.1597 233.5 L600.8309 233.5 L600.8309 352.9689"/>
+        <path d="M600.8309 360.9689 L605.8309 348.9689 L600.8309 351.9689 L595.8309 348.9689 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.14" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M599.668 202 L599.668 217.5 L621.8101 217.5 L621.8101 352.965"/>
+        <path d="M621.8101 360.965 L626.8101 348.965 L621.8101 351.965 L616.8101 348.965 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.12" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M600.8309 391 L600.8309 438.5 L311.2867 438.5 L311.2867 445.9697"/>
+        <path d="M311.2867 453.9697 L316.2867 441.9697 L311.2867 444.9697 L306.2867 441.9697 Z" stroke="none"/>
       </g>
     </g>
     <g onmouseout="HideTooltip(evt)" id="y.edge.18" onmousemove="ShowTooltip(evt)">
@@ -392,35 +392,23 @@
     </g>
     <g onmouseout="HideTooltip(evt)" id="y.edge.20" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M130.0417 80 L130.0417 95.5 L72.448 95.5 L72.448 163.9626"/>
-        <path d="M72.448 171.9626 L77.448 159.9626 L72.448 162.9626 L67.448 159.9626 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.21" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M147.7337 80 L147.7337 102.9697"/>
-        <path d="M147.7337 110.9697 L152.7337 98.9697 L147.7337 101.9697 L142.7337 98.9697 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.22" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M265.6367 141 L265.6367 156.5 L343.5913 156.5 L343.5913 163.9697"/>
         <path d="M343.5913 171.9697 L348.5913 159.9697 L343.5913 162.9697 L338.5913 159.9697 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.25" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.21" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M343.5913 202 L343.5913 217.5 L330.0446 217.5 L330.0446 352.965"/>
         <path d="M330.0446 360.965 L335.0446 348.965 L330.0446 351.965 L325.0446 348.965 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.23" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.22" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M250.6536 141 L250.6536 163.9697"/>
         <path d="M250.6536 171.9697 L255.6536 159.9697 L250.6536 162.9697 L245.6536 159.9697 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.26" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.23" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M250.6536 202 L250.6536 217.5 L318.9841 217.5 L318.9841 352.965"/>
         <path d="M318.9841 360.965 L323.9841 348.965 L318.9841 351.965 L313.9841 348.965 Z" stroke="none"/>
@@ -428,23 +416,35 @@
     </g>
     <g onmouseout="HideTooltip(evt)" id="y.edge.24" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M130.0417 80 L130.0417 95.5 L72.448 95.5 L72.448 163.9626"/>
+        <path d="M72.448 171.9626 L77.448 159.9626 L72.448 162.9626 L67.448 159.9626 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.25" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M93.4272 202 L93.4272 249.5 L237.3445 249.5 L237.3445 352.9728"/>
+        <path d="M237.3445 360.9728 L242.3445 348.9728 L237.3445 351.9728 L232.3445 348.9728 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.26" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M237.3445 391 L237.3445 406.5 L275.3224 406.5 L275.3224 445.9536"/>
+        <path d="M275.3224 453.9536 L280.3224 441.9536 L275.3224 444.9536 L270.3224 441.9536 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.27" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M235.6705 141 L235.6705 156.5 L175.3677 156.5 L175.3677 163.9697"/>
         <path d="M175.3677 171.9697 L180.3677 159.9697 L175.3677 162.9697 L170.3677 159.9697 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.33" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M147.7337 141 L147.7339 163.9697"/>
-        <path d="M147.7339 171.9697 L152.7338 159.9697 L147.7339 162.9697 L142.7338 159.9698 Z" stroke="none"/>
-      </g>
-    </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.32" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.28" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M161.5508 202 L161.5508 233.5 L284.3135 233.5 L284.3135 445.9731"/>
         <path d="M284.3135 453.9731 L289.3135 441.9731 L284.3135 444.9731 L279.3135 441.9731 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.27" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.29" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M72.448 202 L72.448 265.5 L144.4068 265.5 L144.4068 352.9534"/>
         <path d="M144.4068 360.9534 L149.4068 348.9534 L144.4068 351.9534 L139.4068 348.9534 Z" stroke="none"/>
@@ -456,19 +456,19 @@
         <path d="M266.3314 453.9692 L271.3314 441.9692 L266.3314 444.9692 L261.3314 441.9692 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.28" onmousemove="ShowTooltip(evt)">
-      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M93.4272 202 L93.4272 249.5 L237.3445 249.5 L237.3445 352.9728"/>
-        <path d="M237.3445 360.9728 L242.3445 348.9728 L237.3445 351.9728 L232.3445 348.9728 Z" stroke="none"/>
-      </g>
-    </g>
     <g onmouseout="HideTooltip(evt)" id="y.edge.31" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
-        <path fill="none" d="M237.3445 391 L237.3445 406.5 L275.3224 406.5 L275.3224 445.9536"/>
-        <path d="M275.3224 453.9536 L280.3224 441.9536 L275.3224 444.9536 L270.3224 441.9536 Z" stroke="none"/>
+        <path fill="none" d="M147.7337 80 L147.7337 102.9697"/>
+        <path d="M147.7337 110.9697 L152.7337 98.9697 L147.7337 101.9697 L142.7337 98.9697 Z" stroke="none"/>
       </g>
     </g>
-    <g onmouseout="HideTooltip(evt)" id="y.edge.29" onmousemove="ShowTooltip(evt)">
+    <g onmouseout="HideTooltip(evt)" id="y.edge.32" onmousemove="ShowTooltip(evt)">
+      <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
+        <path fill="none" d="M147.7337 141 L147.7339 163.9697"/>
+        <path d="M147.7339 171.9697 L152.7338 159.9697 L147.7339 162.9697 L142.7338 159.9698 Z" stroke="none"/>
+      </g>
+    </g>
+    <g onmouseout="HideTooltip(evt)" id="y.edge.33" onmousemove="ShowTooltip(evt)">
       <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
         <path fill="none" d="M51.4688 202 L51.469 352.9612"/>
         <path d="M51.469 360.9612 L56.469 348.9612 L51.469 351.9612 L46.469 348.9612 Z" stroke="none"/>
@@ -662,26 +662,26 @@
     </g>
     <g visibility="hidden" id="tooltip.y.edge.20" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
-        <rect x="0" width="67" height="17" y="0" clip-path="url(#clipPath3)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath3)" stroke="none">activation</text>
+        <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">phosphorylation,activation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
-        <path d="M0 0 L67 0 L67 17 L0 17 L0 0 ZM1 1 L66 1 L66 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath3)" stroke="none"/>
+        <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
       </g>
     </g>
     <g visibility="hidden" id="tooltip.y.edge.21" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
-        <rect x="0" width="67" height="17" y="0" clip-path="url(#clipPath3)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath3)" stroke="none">activation</text>
+        <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">activation,phosphorylation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
-        <path d="M0 0 L67 0 L67 17 L0 17 L0 0 ZM1 1 L66 1 L66 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath3)" stroke="none"/>
+        <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
       </g>
     </g>
     <g visibility="hidden" id="tooltip.y.edge.22" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
         <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">phosphorylation,activation</text>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">activation,phosphorylation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
         <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
@@ -717,7 +717,7 @@
     <g visibility="hidden" id="tooltip.y.edge.26" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
         <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">activation,phosphorylation</text>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">phosphorylation,activation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
         <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
@@ -725,20 +725,20 @@
     </g>
     <g visibility="hidden" id="tooltip.y.edge.27" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
-        <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">activation,phosphorylation</text>
+        <rect x="0" width="67" height="17" y="0" clip-path="url(#clipPath3)" stroke="none"/>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath3)" stroke="none">activation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
-        <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
+        <path d="M0 0 L67 0 L67 17 L0 17 L0 0 ZM1 1 L66 1 L66 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath3)" stroke="none"/>
       </g>
     </g>
     <g visibility="hidden" id="tooltip.y.edge.28" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
-        <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">phosphorylation,activation</text>
+        <rect x="0" width="67" height="17" y="0" clip-path="url(#clipPath3)" stroke="none"/>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath3)" stroke="none">activation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
-        <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
+        <path d="M0 0 L67 0 L67 17 L0 17 L0 0 ZM1 1 L66 1 L66 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath3)" stroke="none"/>
       </g>
     </g>
     <g visibility="hidden" id="tooltip.y.edge.29" pointer-events="none">
@@ -761,11 +761,11 @@
     </g>
     <g visibility="hidden" id="tooltip.y.edge.31" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
-        <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">activation,phosphorylation</text>
+        <rect x="0" width="67" height="17" y="0" clip-path="url(#clipPath3)" stroke="none"/>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath3)" stroke="none">activation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
-        <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
+        <path d="M0 0 L67 0 L67 17 L0 17 L0 0 ZM1 1 L66 1 L66 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath3)" stroke="none"/>
       </g>
     </g>
     <g visibility="hidden" id="tooltip.y.edge.32" pointer-events="none">
@@ -779,17 +779,17 @@
     </g>
     <g visibility="hidden" id="tooltip.y.edge.33" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
-        <rect x="0" width="67" height="17" y="0" clip-path="url(#clipPath3)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath3)" stroke="none">activation</text>
+        <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">phosphorylation,activation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
-        <path d="M0 0 L67 0 L67 17 L0 17 L0 0 ZM1 1 L66 1 L66 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath3)" stroke="none"/>
+        <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
       </g>
     </g>
     <g visibility="hidden" id="tooltip.y.edge.34" pointer-events="none">
       <g fill="rgb(195,212,232)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(195,212,232)">
         <rect x="0" width="168" height="17" y="0" clip-path="url(#clipPath4)" stroke="none"/>
-        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">phosphorylation,activation</text>
+        <text fill="black" x="4" xml:space="preserve" y="13" clip-path="url(#clipPath4)" stroke="none">activation,phosphorylation</text>
       </g>
       <g fill="rgb(49,106,196)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" font-family="sans-serif" stroke="rgb(49,106,196)">
         <path d="M0 0 L168 0 L168 17 L0 17 L0 0 ZM1 1 L167 1 L167 16 L1 16 L1 1 Z" fill-rule="evenodd" clip-path="url(#clipPath4)" stroke="none"/>
