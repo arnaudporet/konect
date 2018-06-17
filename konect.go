@@ -1,4 +1,4 @@
-// Copyright 2017 Arnaud Poret
+// Copyright 2017-2018 Arnaud Poret
 // This work is licensed under the BSD 2-Clause License.
 package main
 import (
@@ -13,109 +13,106 @@ import (
 )
 func main() {
     var (
-        maxStep,maxWalk,shortest int64
+        maxStep,maxWalk,shortest,selfConnect int64
         sources,targets []string
         allPaths [][]string
         succ map[string][]string
         edges map[string]map[string]string
     )
-    if len(os.Args)==2 && os.Args[1]=="help" {
+    if (len(os.Args)==2) && (os.Args[1]=="help") {
         fmt.Println(strings.Join([]string{
             "",
-            "konect is a basic algorithm for connecting nodes according to a reference",
-            "network.",
+            "konect is a tool for connecting nodes according to a reference network.",
             "",
-            "Typical usage consists in extracting, from the reference network, the paths",
-            "connecting a couple of nodes belonging to it.",
+            "Typical usage consists in extracting, from the reference network, the paths connecting a couple of nodes.",
             "",
             "konect handles networks encoded in the sif file format.",
             "",
-            "konect does not handle multigraphs (i.e. networks with nodes connected by more",
-            "than one edge).",
+            "konect does not handle multi-graphs (i.e. networks where nodes can be connected by more than one edge).",
             "",
-            "Usage: konect networkFile sourceFile targetFile maxStep maxWalk shortest",
+            "Usage: konect networkFile sourceFile targetFile maxStep maxWalk shortest selfConnect",
             "",
             "    * networkFile: the reference network encoded in a sif file",
             "",
-            "    * sourceFile: the source nodes listed in a csv file (one node per line)",
+            "    * sourceFile: the source nodes listed in a file (one node per line)",
             "",
-            "    * targetFile: the target nodes listed in a csv file (one node per line)",
+            "    * targetFile: the target nodes listed in a file (one node per line)",
             "",
-            "    * maxStep: the maximum number of steps performed during a random walk",
-            "      starting from a source node in an attempt to reach a target node",
+            "    * maxStep (>0): the maximum number of steps performed during a random walk when searching for a path connecting a source node to a target node",
             "",
-            "    * maxWalk: the maximum number of random walks performed in the reference",
-            "      network to find paths from a source node to a target node",
+            "    * maxWalk (>0): the maximum number of random walks performed in the reference network when searching for paths connecting a source node to a target node",
             "",
-            "    * shortest (1 or 0): among the found connecting paths, select only (1) or",
-            "      not only (0) the shortest",
+            "    * shortest (0 or 1): among the found connecting paths, selects only the shortest ones (1) or not (0)",
             "",
-            "The returned file is a sif file encoding a subnetwork of the reference network",
-            "connecting the source nodes to the target nodes.",
+            "    * selfConnect (0 or 1): if a node belongs to both the source and target nodes, allows to find paths connecting it to itself (1) or not (0)",
             "",
-            "For more information: https://github.com/arnaudporet/konect",
+            "The returned file is a sif file encoding a subnetwork (of the reference network) connecting the source nodes to the target nodes.",
+            "",
+            "For more information see https://github.com/arnaudporet/konect",
             "",
         },"\n"))
-    } else if len(os.Args)==2 && os.Args[1]=="license" {
+    } else if (len(os.Args)==2) && (os.Args[1]=="license") {
         fmt.Println(strings.Join([]string{
             "",
-            "Copyright 2017 Arnaud Poret",
+            "Copyright 2017-2018 Arnaud Poret",
             "",
-            "Redistribution and use in source and binary forms, with or without modification,",
-            "are permitted provided that the following conditions are met:",
+            "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:",
             "",
-            "1. Redistributions of source code must retain the above copyright notice, this",
-            "   list of conditions and the following disclaimer.",
+            "1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.",
             "",
-            "2. Redistributions in binary form must reproduce the above copyright notice,",
-            "   this list of conditions and the following disclaimer in the documentation",
-            "   and/or other materials provided with the distribution.",
+            "2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.",
             "",
-            "THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND",
-            "ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED",
-            "WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE",
-            "DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR",
-            "ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES",
-            "(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;",
-            "LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON",
-            "ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT",
-            "(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS",
-            "SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
+            "THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.",
             "",
         },"\n"))
-    } else if len(os.Args)==2 && os.Args[1]=="usage" {
+    } else if (len(os.Args)==2) && (os.Args[1]=="usage") {
         fmt.Println(strings.Join([]string{
             "",
-            "konect networkFile sourceFile targetFile maxStep maxWalk shortest",
+            "konect networkFile sourceFile targetFile maxStep maxWalk shortest selfConnect",
             "",
         },"\n"))
-    } else if len(os.Args)==7 {
+    } else if len(os.Args)==8 {
+        selfConnect,_=strconv.ParseInt(os.Args[7],10,0)
         shortest,_=strconv.ParseInt(os.Args[6],10,0)
         maxWalk,_=strconv.ParseInt(os.Args[5],10,0)
         maxStep,_=strconv.ParseInt(os.Args[4],10,0)
-        if int(shortest)!=0 && int(shortest)!=1 {
-            panic("shortest must be 1 or 0")
+        if (int(selfConnect)!=0) && (int(selfConnect)!=1) {
+            fmt.Println("ERROR: selfConnect must be 0 or 1")
+        } else if (int(shortest)!=0) && (int(shortest)!=1) {
+            fmt.Println("ERROR: shortest must be 0 or 1")
+        } else if int(maxWalk)<1 {
+            fmt.Println("ERROR: maxWalk must 1 or more")
+        } else if int(maxStep)<1 {
+            fmt.Println("ERROR: maxStep must 1 or more")
+        } else {
+            succ,edges=ReadNetwork(os.Args[1])
+            sources=ReadNodes(os.Args[2],succ)
+            targets=ReadNodes(os.Args[3],succ)
+            if len(edges)==0 {
+                fmt.Println("ERROR: "+os.Args[1]+" is empty after reading")
+            } else if len(sources)==0 {
+                fmt.Println("ERROR: "+os.Args[2]+" is empty after reading")
+            } else if len(targets)==0 {
+                fmt.Println("ERROR: "+os.Args[3]+" is empty after reading")
+            } else {
+                rand.Seed(int64(time.Now().Nanosecond()))
+                allPaths=FindAllPaths(sources,targets,int(maxStep),int(maxWalk),int(shortest),int(selfConnect),succ)
+                if len(allPaths)==0 {
+                    fmt.Println("WARNING: no connecting paths found")
+                } else {
+                    WriteNetwork("konected.sif",allPaths,edges)
+                }
+            }
         }
-        if int(maxWalk)<1 {
-            panic("maxWalk must 1 or more")
-        }
-        if int(maxStep)<1 {
-            panic("maxStep must 1 or more")
-        }
-        rand.Seed(int64(time.Now().Nanosecond()))
-        succ,edges=ReadNetwork(os.Args[1])
-        sources=ReadNodes(os.Args[2],succ)
-        targets=ReadNodes(os.Args[3],succ)
-        allPaths=FindAllPaths(sources,targets,int(maxStep),int(maxWalk),int(shortest),succ)
-        WriteNetwork("konected.sif",allPaths,edges)
     } else {
         fmt.Println(strings.Join([]string{
+            "ERROR: wrong number of arguments",
             "",
-            "To print help:        konect help",
-            "To print license:     konect license",
-            "To print usage:       konect usage",
+            "To print help:    konect help",
+            "To print license: konect license",
+            "To print usage:   konect usage",
             "",
-            "For more information: https://github.com/arnaudporet/konect",
+            "For more information see https://github.com/arnaudporet/konect",
             "",
         },"\n"))
     }
@@ -126,27 +123,28 @@ func CopyPath(path []string) []string {
     copy(y,path)
     return y
 }
-func FindAllPaths(sources,targets []string,maxStep,maxWalk,shortest int,succ map[string][]string) [][]string {
+func FindAllPaths(sources,targets []string,maxStep,maxWalk,shortest,selfConnect int,succ map[string][]string) [][]string {
     var (
-        i1,i2,i3,imax int
-        tail1,tail2 string
+        i,imax int
+        source,target string
         paths,allPaths [][]string
     )
-    tail1="/"+strconv.FormatInt(int64(len(sources)),10)+")"
-    tail2="/"+strconv.FormatInt(int64(len(targets)),10)+")"
-    for i1=range sources {
-        fmt.Println("Sourcing "+sources[i1]+" ("+strconv.FormatInt(int64(i1+1),10)+tail1)
-        for i2=range targets {
-            fmt.Println("    Targeting "+targets[i2]+" ("+strconv.FormatInt(int64(i2+1),10)+tail2)
-            paths=FindPaths(sources[i1],targets[i2],maxStep,maxWalk,succ)
-            if shortest==1 {
-                imax=sort.Search(len(paths),func(i int) bool {return len(paths[i])>len(paths[0])})
-            } else {
-                imax=len(paths)
-            }
-            for i3=0;i3<imax;i3++ {
-                if !IsInPaths(allPaths,paths[i3]) {
-                    allPaths=append(allPaths,CopyPath(paths[i3]))
+    for _,source=range sources {
+        for _,target=range targets {
+            if (source!=target) || (selfConnect==1) {
+                paths=FindPaths(source,target,maxStep,maxWalk,succ)
+                if len(paths)!=0 {
+                    if shortest==1 {
+                        sort.Slice(paths,func(i,j int) bool {return len(paths[i])<len(paths[j])})
+                        imax=sort.Search(len(paths),func(i int) bool {return len(paths[i])>len(paths[0])})
+                    } else {
+                        imax=len(paths)
+                    }
+                    for i=0;i<imax;i++ {
+                        if !IsInPaths(allPaths,paths[i]) {
+                            allPaths=append(allPaths,CopyPath(paths[i]))
+                        }
+                    }
                 }
             }
         }
@@ -161,11 +159,10 @@ func FindPaths(source,target string,maxStep,maxWalk int,succ map[string][]string
     )
     for i=0;i<maxWalk;i++ {
         path=RandomWalk(source,target,maxStep,succ)
-        if len(path)!=0 && !IsInPaths(paths,path) {
+        if (len(path)!=0) && !IsInPaths(paths,path) {
             paths=append(paths,CopyPath(path))
         }
     }
-    sort.Slice(paths,func(i,j int) bool {return len(paths[i])<len(paths[j])})
     return paths
 }
 func IsInPath(path []string,thatNode string) bool {
@@ -244,31 +241,38 @@ func ReadNetwork(networkFile string) (map[string][]string,map[string]map[string]
         reader *csv.Reader
         file *os.File
     )
-    fmt.Println("Reading "+networkFile)
     file,_=os.Open(networkFile)
-    defer file.Close()
     reader=csv.NewReader(file)
     reader.Comma='\t'
     reader.Comment=0
     reader.FieldsPerRecord=3
     reader.LazyQuotes=false
     reader.TrimLeadingSpace=true
+    reader.ReuseRecord=true
     lines,err=reader.ReadAll()
-    if err!=nil {
-        fmt.Println("\nERROR: "+err.Error()+"\n")
-        panic(networkFile+" is not properly formated")
-    }
+    file.Close()
     succ=make(map[string][]string)
     edges=make(map[string]map[string]string)
-    for _,line=range lines {
-        for _,node=range []string{line[0],line[2]} {
-            succ[node]=[]string{}
+    if err!=nil {
+        fmt.Println("ERROR: "+networkFile+" "+err.Error())
+    } else {
+        for _,line=range lines {
+            for _,node=range []string{line[0],line[2]} {
+                succ[node]=[]string{}
+            }
+            edges[line[0]]=make(map[string]string)
         }
-        edges[line[0]]=make(map[string]string)
-    }
-    for _,line=range lines {
-        succ[line[0]]=append(succ[line[0]],line[2])
-        edges[line[0]][line[2]]=line[1]
+        for _,line=range lines {
+            if IsInPath(succ[line[0]],line[2]) {
+                fmt.Println("ERROR: "+networkFile+" contains multi-edges")
+                succ=make(map[string][]string)
+                edges=make(map[string]map[string]string)
+                break
+            } else {
+                succ[line[0]]=append(succ[line[0]],line[2])
+                edges[line[0]][line[2]]=line[1]
+            }
+        }
     }
     return succ,edges
 }
@@ -280,23 +284,25 @@ func ReadNodes(nodeFile string,succ map[string][]string) []string {
         reader *csv.Reader
         file *os.File
     )
-    fmt.Println("Reading "+nodeFile)
     file,_=os.Open(nodeFile)
-    defer file.Close()
     reader=csv.NewReader(file)
     reader.Comma=','
     reader.Comment=0
     reader.FieldsPerRecord=1
     reader.LazyQuotes=false
     reader.TrimLeadingSpace=true
+    reader.ReuseRecord=true
     lines,err=reader.ReadAll()
+    file.Close()
     if err!=nil {
-        fmt.Println("\nERROR: "+err.Error()+"\n")
-        panic(nodeFile+" is not properly formated")
-    }
-    for _,line=range lines {
-        if !IsInPath(nodes,line[0]) && IsInSucc(succ,line[0]) {
-            nodes=append(nodes,line[0])
+        fmt.Println("ERROR: "+nodeFile+" "+err.Error())
+    } else {
+        for _,line=range lines {
+            if !IsInSucc(succ,line[0]) {
+                fmt.Println("WARNING: "+line[0]+" in "+nodeFile+" but not in network")
+            } else if !IsInPath(nodes,line[0]) {
+                nodes=append(nodes,line[0])
+            }
         }
     }
     return nodes
@@ -309,7 +315,6 @@ func WriteNetwork(networkFile string,paths [][]string,edges map[string]map[strin
         writer *csv.Writer
         file *os.File
     )
-    fmt.Println("Writing "+networkFile)
     for _,path=range paths {
         for i=0;i<len(path)-1;i++ {
             line=[]string{path[i],edges[path[i]][path[i+1]],path[i+1]}
@@ -319,9 +324,9 @@ func WriteNetwork(networkFile string,paths [][]string,edges map[string]map[strin
         }
     }
     file,_=os.Create(networkFile)
-    defer file.Close()
     writer=csv.NewWriter(file)
     writer.Comma='\t'
     writer.UseCRLF=false
     writer.WriteAll(lines)
+    file.Close()
 }
