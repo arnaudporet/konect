@@ -125,14 +125,18 @@ func CopyPath(path []string) []string {
 }
 func FindAllPaths(sources,targets []string,maxStep,maxWalk,shortest,selfConnect int,succ map[string][]string) [][]string {
     var (
-        i,imax int
-        source,target string
+        i1,i2,i3,imax int
+        tail1,tail2 string
         paths,allPaths [][]string
     )
-    for _,source=range sources {
-        for _,target=range targets {
-            if (source!=target) || (selfConnect==1) {
-                paths=FindPaths(source,target,maxStep,maxWalk,succ)
+    tail1="/"+strconv.FormatInt(int64(len(sources)),10)+")"
+    tail2="/"+strconv.FormatInt(int64(len(targets)),10)+")"
+    for i1=range sources {
+        fmt.Println("sourcing "+sources[i1]+" ("+strconv.FormatInt(int64(i1+1),10)+tail1)
+        for i2=range targets {
+            if (sources[i1]!=targets[i2]) || (selfConnect==1) {
+                fmt.Println("    targeting "+targets[i2]+" ("+strconv.FormatInt(int64(i2+1),10)+tail2)
+                paths=FindPaths(sources[i1],targets[i2],maxStep,maxWalk,succ)
                 if len(paths)!=0 {
                     if shortest==1 {
                         sort.Slice(paths,func(i,j int) bool {return len(paths[i])<len(paths[j])})
@@ -140,9 +144,9 @@ func FindAllPaths(sources,targets []string,maxStep,maxWalk,shortest,selfConnect 
                     } else {
                         imax=len(paths)
                     }
-                    for i=0;i<imax;i++ {
-                        if !IsInPaths(allPaths,paths[i]) {
-                            allPaths=append(allPaths,CopyPath(paths[i]))
+                    for i3=0;i3<imax;i3++ {
+                        if !IsInPaths(allPaths,paths[i3]) {
+                            allPaths=append(allPaths,CopyPath(paths[i3]))
                         }
                     }
                 }
@@ -241,6 +245,7 @@ func ReadNetwork(networkFile string) (map[string][]string,map[string]map[string]
         reader *csv.Reader
         file *os.File
     )
+    fmt.Println("reading "+networkFile)
     file,_=os.Open(networkFile)
     reader=csv.NewReader(file)
     reader.Comma='\t'
@@ -284,6 +289,7 @@ func ReadNodes(nodeFile string,succ map[string][]string) []string {
         reader *csv.Reader
         file *os.File
     )
+    fmt.Println("reading "+nodeFile)
     file,_=os.Open(nodeFile)
     reader=csv.NewReader(file)
     reader.Comma=','
@@ -315,6 +321,7 @@ func WriteNetwork(networkFile string,paths [][]string,edges map[string]map[strin
         writer *csv.Writer
         file *os.File
     )
+    fmt.Println("writing "+networkFile)
     for _,path=range paths {
         for i=0;i<len(path)-1;i++ {
             line=[]string{path[i],edges[path[i]][path[i+1]],path[i+1]}
