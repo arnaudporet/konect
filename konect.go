@@ -4,49 +4,67 @@ package main
 import (
     "encoding/csv"
     "fmt"
-    "math/rand"
     "os"
-    "sort"
-    "strconv"
     "strings"
-    "time"
 )
 func main() {
     var (
-        maxStep,maxWalk,shortest,selfConnect int64
         sources,targets []string
-        allPaths [][]string
-        succ map[string][]string
-        edges map[string]map[string]string
+        forwardSources,backwardTargets,intersect [][]string
+        nodeSucc,nodePred map[string][]string
+        edgeNames map[string]map[string]string
+        edgeSucc,edgePred map[string]map[string][][]string
     )
-    if (len(os.Args)==2) && (os.Args[1]=="help") {
+    if len(os.Args)==4 {
+        nodeSucc,nodePred,edgeSucc,edgePred,edgeNames=ReadNetwork(os.Args[1])
+        if len(edgeNames)==0 {
+            fmt.Println("WARNING: "+os.Args[1]+" is empty after reading")
+        } else {
+            sources=ReadNodes(os.Args[2],nodeSucc)
+            targets=ReadNodes(os.Args[3],nodeSucc)
+            if len(sources)==0 {
+                fmt.Println("WARNING: "+os.Args[2]+" is empty after reading")
+            } else if len(targets)==0 {
+                fmt.Println("WARNING: "+os.Args[3]+" is empty after reading")
+            } else {
+                forwardSources=ForwardEdges(sources,nodeSucc,edgeSucc)
+                backwardTargets=BackwardEdges(targets,nodePred,edgePred)
+                if len(forwardSources)==0 {
+                    fmt.Println("WARNING: sources have no forward paths")
+                } else if len(backwardTargets)==0 {
+                    fmt.Println("WARNING: targets have no backward paths")
+                } else {
+                    intersect=IntersectEdges(forwardSources,backwardTargets)
+                    if len(intersect)==0 {
+                        fmt.Println("WARNING: no connecting paths found")
+                    } else {
+                        WriteNetwork("konected.sif",intersect,edgeNames)
+                    }
+                }
+            }
+        }
+    } else if (len(os.Args)==2) && (os.Args[1]=="help") {
         fmt.Println(strings.Join([]string{
             "",
-            "konect is a tool for connecting nodes according to a reference network.",
+            "konect is a tool for finding paths connecting a couple of nodes in a network.",
             "",
-            "Typical usage consists in extracting, from the reference network, the paths connecting a couple of nodes.",
+            "Typical use is to find in a network the paths connecting some source nodes to some target nodes.",
             "",
-            "konect handles networks encoded in the sif file format.",
+            "konect handles networks encoded in the SIF file format.",
             "",
             "konect does not handle multi-graphs (i.e. networks where nodes can be connected by more than one edge).",
             "",
-            "Usage: konect networkFile sourceFile targetFile maxStep maxWalk shortest selfConnect",
+            "Note that if a network contains duplicated edges then it is a multi-graph.",
             "",
-            "    * networkFile: the reference network encoded in a sif file",
+            "Usage: konect networkFile sourceFile targetFile",
             "",
-            "    * sourceFile: the source nodes listed in a file (one node per line)",
+            "    * networkFile: the network encoded in a SIF file",
             "",
-            "    * targetFile: the target nodes listed in a file (one node per line)",
+            "    * sourceFile:  the source nodes listed in a file (one node per line)",
             "",
-            "    * maxStep (>0): the maximum number of steps performed during a random walk when searching for a path connecting a source node to a target node",
+            "    * targetFile:  the target nodes listed in a file (one node per line)",
             "",
-            "    * maxWalk (>0): the maximum number of random walks performed in the reference network when searching for paths connecting a source node to a target node",
-            "",
-            "    * shortest (0 or 1): among the found connecting paths, selects only the shortest ones (1) or not (0)",
-            "",
-            "    * selfConnect (0 or 1): if a node belongs to both the source and target nodes, allows to find paths connecting it to itself (1) or not (0)",
-            "",
-            "The returned file is a sif file encoding a subnetwork (of the reference network) connecting the source nodes to the target nodes.",
+            "The returned file is a SIF file encoding the paths connecting the source nodes to the target nodes in the network.",
             "",
             "For more information see https://github.com/arnaudporet/konect",
             "",
@@ -68,42 +86,9 @@ func main() {
     } else if (len(os.Args)==2) && (os.Args[1]=="usage") {
         fmt.Println(strings.Join([]string{
             "",
-            "konect networkFile sourceFile targetFile maxStep maxWalk shortest selfConnect",
+            "konect networkFile sourceFile targetFile",
             "",
         },"\n"))
-    } else if len(os.Args)==8 {
-        selfConnect,_=strconv.ParseInt(os.Args[7],10,0)
-        shortest,_=strconv.ParseInt(os.Args[6],10,0)
-        maxWalk,_=strconv.ParseInt(os.Args[5],10,0)
-        maxStep,_=strconv.ParseInt(os.Args[4],10,0)
-        if (int(selfConnect)!=0) && (int(selfConnect)!=1) {
-            fmt.Println("ERROR: selfConnect must be 0 or 1")
-        } else if (int(shortest)!=0) && (int(shortest)!=1) {
-            fmt.Println("ERROR: shortest must be 0 or 1")
-        } else if int(maxWalk)<1 {
-            fmt.Println("ERROR: maxWalk must 1 or more")
-        } else if int(maxStep)<1 {
-            fmt.Println("ERROR: maxStep must 1 or more")
-        } else {
-            succ,edges=ReadNetwork(os.Args[1])
-            sources=ReadNodes(os.Args[2],succ)
-            targets=ReadNodes(os.Args[3],succ)
-            if len(edges)==0 {
-                fmt.Println("ERROR: "+os.Args[1]+" is empty after reading")
-            } else if len(sources)==0 {
-                fmt.Println("ERROR: "+os.Args[2]+" is empty after reading")
-            } else if len(targets)==0 {
-                fmt.Println("ERROR: "+os.Args[3]+" is empty after reading")
-            } else {
-                rand.Seed(int64(time.Now().Nanosecond()))
-                allPaths=FindAllPaths(sources,targets,int(maxStep),int(maxWalk),int(shortest),int(selfConnect),succ)
-                if len(allPaths)==0 {
-                    fmt.Println("WARNING: no connecting paths found")
-                } else {
-                    WriteNetwork("konected.sif",allPaths,edges)
-                }
-            }
-        }
     } else {
         fmt.Println(strings.Join([]string{
             "ERROR: wrong number of arguments",
@@ -117,223 +102,277 @@ func main() {
         },"\n"))
     }
 }
-func CopyPath(path []string) []string {
-    var y []string
-    y=make([]string,len(path))
-    copy(y,path)
-    return y
-}
-func FindAllPaths(sources,targets []string,maxStep,maxWalk,shortest,selfConnect int,succ map[string][]string) [][]string {
+func BackwardEdges(nroots []string,nodePred map[string][]string,edgePred map[string]map[string][][]string) [][]string {
     var (
-        i1,i2,i3,imax int
-        tail1,tail2 string
-        paths,allPaths [][]string
+        nroot,npred string
+        eroot,check,epred []string
+        backward,newCheck,toCheck [][]string
     )
-    tail1="/"+strconv.FormatInt(int64(len(sources)),10)+")"
-    tail2="/"+strconv.FormatInt(int64(len(targets)),10)+")"
-    for i1=range sources {
-        fmt.Println("sourcing "+sources[i1]+" ("+strconv.FormatInt(int64(i1+1),10)+tail1)
-        for i2=range targets {
-            if (sources[i1]!=targets[i2]) || (selfConnect==1) {
-                fmt.Println("    targeting "+targets[i2]+" ("+strconv.FormatInt(int64(i2+1),10)+tail2)
-                paths=FindPaths(sources[i1],targets[i2],maxStep,maxWalk,succ)
-                if len(paths)!=0 {
-                    if shortest==1 {
-                        sort.Slice(paths,func(i,j int) bool {return len(paths[i])<len(paths[j])})
-                        imax=sort.Search(len(paths),func(i int) bool {return len(paths[i])>len(paths[0])})
-                    } else {
-                        imax=len(paths)
-                    }
-                    for i3=0;i3<imax;i3++ {
-                        if !IsInPaths(allPaths,paths[i3]) {
-                            allPaths=append(allPaths,CopyPath(paths[i3]))
+    for _,nroot=range nroots {
+        fmt.Println("backwarding "+nroot)
+        for _,npred=range nodePred[nroot] {
+            eroot=[]string{npred,nroot}
+            if !IsInList2(backward,eroot) {
+                backward=append(backward,CopyList(eroot))
+                newCheck=[][]string{CopyList(eroot)}
+                for {
+                    toCheck=CopyList2(newCheck)
+                    newCheck=[][]string{}
+                    for _,check=range toCheck {
+                        for _,epred=range edgePred[check[0]][check[1]] {
+                            if !IsInList2(backward,epred) {
+                                backward=append(backward,CopyList(epred))
+                                newCheck=append(newCheck,CopyList(epred))
+                            }
                         }
                     }
+                    if len(newCheck)==0 {
+                        break
+                    }
                 }
             }
         }
     }
-    return allPaths
+    return backward
 }
-func FindPaths(source,target string,maxStep,maxWalk int,succ map[string][]string) [][]string {
+func CopyList(list []string) []string {
+    var y []string
+    y=make([]string,len(list))
+    copy(y,list)
+    return y
+}
+func CopyList2(list2 [][]string) [][]string {
     var (
         i int
-        path []string
-        paths [][]string
+        y [][]string
     )
-    for i=0;i<maxWalk;i++ {
-        path=RandomWalk(source,target,maxStep,succ)
-        if (len(path)!=0) && !IsInPaths(paths,path) {
-            paths=append(paths,CopyPath(path))
+    y=make([][]string,len(list2))
+    for i=range list2 {
+        y[i]=make([]string,len(list2[i]))
+        copy(y[i],list2[i])
+    }
+    return y
+}
+func ForwardEdges(nroots []string,nodeSucc map[string][]string,edgeSucc map[string]map[string][][]string) [][]string {
+    var (
+        nroot,nsucc string
+        eroot,check,esucc []string
+        forward,newCheck,toCheck [][]string
+    )
+    for _,nroot=range nroots {
+        fmt.Println("forwarding "+nroot)
+        for _,nsucc=range nodeSucc[nroot] {
+            eroot=[]string{nroot,nsucc}
+            if !IsInList2(forward,eroot) {
+                forward=append(forward,CopyList(eroot))
+                newCheck=[][]string{CopyList(eroot)}
+                for {
+                    toCheck=CopyList2(newCheck)
+                    newCheck=[][]string{}
+                    for _,check=range toCheck {
+                        for _,esucc=range edgeSucc[check[0]][check[1]] {
+                            if !IsInList2(forward,esucc) {
+                                forward=append(forward,CopyList(esucc))
+                                newCheck=append(newCheck,CopyList(esucc))
+                            }
+                        }
+                    }
+                    if len(newCheck)==0 {
+                        break
+                    }
+                }
+            }
         }
     }
-    return paths
+    return forward
 }
-func IsInPath(path []string,thatNode string) bool {
+func IntersectEdges(edges1,edges2 [][]string) [][]string {
+    var (
+        edge []string
+        intersect [][]string
+    )
+    fmt.Println("computing intersection")
+    for _,edge=range edges1 {
+        if IsInList2(edges2,edge) {
+            intersect=append(intersect,CopyList(edge))
+        }
+    }
+    return intersect
+}
+func IsInList(list []string,thatElement string) bool {
+    var element string
+    for _,element=range list {
+        if element==thatElement {
+            return true
+        }
+    }
+    return false
+}
+func IsInList2(list2 [][]string,thatList []string) bool {
+    var (
+        found bool
+        i int
+        list []string
+    )
+    for _,list=range list2 {
+        if len(list)==len(thatList) {
+            found=true
+            for i=range list {
+                if list[i]!=thatList[i] {
+                    found=false
+                    break
+                }
+            }
+            if found {
+                return true
+            }
+        }
+    }
+    return false
+}
+func IsInNetwork(nodeSucc map[string][]string,thatNode string) bool {
     var node string
-    for _,node=range path {
+    for node=range nodeSucc {
         if node==thatNode {
             return true
         }
     }
     return false
 }
-func IsInPaths(paths [][]string,thatPath []string) bool {
-    var path []string
-    for _,path=range paths {
-        if PathEq(path,thatPath) {
-            return true
-        }
-    }
-    return false
-}
-func IsInSucc(succ map[string][]string,thatNode string) bool {
-    var node string
-    for node=range succ {
-        if node==thatNode {
-            return true
-        }
-    }
-    return false
-}
-func PathEq(path1,path2 []string) bool {
-    var i int
-    if len(path1)!=len(path2) {
-        return false
-    } else {
-        for i=range path1 {
-            if path1[i]!=path2[i] {
-                return false
-            }
-        }
-        return true
-    }
-}
-func RandomWalk(source,target string,maxStep int,succ map[string][]string) []string {
-    var (
-        i int
-        current string
-        path []string
-    )
-    current=source
-    path=append(path,source)
-    for i=0;i<maxStep;i++ {
-        if len(succ[current])==0 {
-            break
-        } else {
-            current=succ[current][rand.Intn(len(succ[current]))]
-            if IsInPath(path,current) && (current!=target) {
-                break
-            } else {
-                path=append(path,current)
-                if current==target {
-                    return path
-                }
-            }
-        }
-    }
-    return []string{}
-}
-func ReadNetwork(networkFile string) (map[string][]string,map[string]map[string]string) {
+func ReadNetwork(networkFile string) (map[string][]string,map[string][]string,map[string]map[string][][]string,map[string]map[string][][]string,map[string]map[string]string) {
     var (
         err error
-        node string
+        node1,node2,node3 string
         line []string
         lines [][]string
-        succ map[string][]string
-        edges map[string]map[string]string
-        reader *csv.Reader
+        nodeSucc,nodePred map[string][]string
+        edgeNames map[string]map[string]string
+        edgeSucc,edgePred map[string]map[string][][]string
         file *os.File
+        reader *csv.Reader
     )
     fmt.Println("reading "+networkFile)
-    file,_=os.Open(networkFile)
-    reader=csv.NewReader(file)
-    reader.Comma='\t'
-    reader.Comment=0
-    reader.FieldsPerRecord=3
-    reader.LazyQuotes=false
-    reader.TrimLeadingSpace=true
-    reader.ReuseRecord=true
-    lines,err=reader.ReadAll()
-    file.Close()
-    succ=make(map[string][]string)
-    edges=make(map[string]map[string]string)
+    file,err=os.Open(networkFile)
+    defer file.Close()
     if err!=nil {
-        fmt.Println("ERROR: "+networkFile+" "+err.Error())
+        fmt.Println("ERROR: "+err.Error())
     } else {
-        for _,line=range lines {
-            for _,node=range []string{line[0],line[2]} {
-                succ[node]=[]string{}
+        reader=csv.NewReader(file)
+        reader.Comma='\t'
+        reader.Comment=0
+        reader.FieldsPerRecord=3
+        reader.LazyQuotes=false
+        reader.TrimLeadingSpace=true
+        reader.ReuseRecord=true
+        lines,err=reader.ReadAll()
+        if err!=nil {
+            fmt.Println("ERROR: "+err.Error())
+        } else {
+            nodeSucc=make(map[string][]string)
+            nodePred=make(map[string][]string)
+            edgeSucc=make(map[string]map[string][][]string)
+            edgePred=make(map[string]map[string][][]string)
+            edgeNames=make(map[string]map[string]string)
+            for _,line=range lines {
+                for _,node1=range []string{line[0],line[2]} {
+                    nodeSucc[node1]=[]string{}
+                    nodePred[node1]=[]string{}
+                }
+                edgeSucc[line[0]]=make(map[string][][]string)
+                edgePred[line[0]]=make(map[string][][]string)
+                edgeNames[line[0]]=make(map[string]string)
             }
-            edges[line[0]]=make(map[string]string)
-        }
-        for _,line=range lines {
-            if IsInPath(succ[line[0]],line[2]) {
-                fmt.Println("ERROR: "+networkFile+" contains multi-edges")
-                succ=make(map[string][]string)
-                edges=make(map[string]map[string]string)
-                break
-            } else {
-                succ[line[0]]=append(succ[line[0]],line[2])
-                edges[line[0]][line[2]]=line[1]
+            for _,line=range lines {
+                if IsInList(nodeSucc[line[0]],line[2]) {
+                    fmt.Println("ERROR: multi-edges (or duplicated edges)")
+                    nodeSucc=make(map[string][]string)
+                    nodePred=make(map[string][]string)
+                    edgeSucc=make(map[string]map[string][][]string)
+                    edgePred=make(map[string]map[string][][]string)
+                    edgeNames=make(map[string]map[string]string)
+                    break
+                } else {
+                    nodeSucc[line[0]]=append(nodeSucc[line[0]],line[2])
+                    nodePred[line[2]]=append(nodePred[line[2]],line[0])
+                    edgeSucc[line[0]][line[2]]=[][]string{}
+                    edgePred[line[0]][line[2]]=[][]string{}
+                    edgeNames[line[0]][line[2]]=line[1]
+                }
+            }
+            for node1=range nodeSucc {
+                for _,node2=range nodeSucc[node1] {
+                    for _,node3=range nodeSucc[node2] {
+                        edgeSucc[node1][node2]=append(edgeSucc[node1][node2],[]string{node2,node3})
+                    }
+                }
+            }
+            for node1=range nodePred {
+                for _,node2=range nodePred[node1] {
+                    for _,node3=range nodePred[node2] {
+                        edgePred[node2][node1]=append(edgePred[node2][node1],[]string{node3,node2})
+                    }
+                }
             }
         }
     }
-    return succ,edges
+    return nodeSucc,nodePred,edgeSucc,edgePred,edgeNames
 }
-func ReadNodes(nodeFile string,succ map[string][]string) []string {
+func ReadNodes(nodeFile string,nodeSucc map[string][]string) []string {
     var (
         err error
-        nodes,line []string
+        line,nodes []string
         lines [][]string
-        reader *csv.Reader
         file *os.File
+        reader *csv.Reader
     )
     fmt.Println("reading "+nodeFile)
-    file,_=os.Open(nodeFile)
-    reader=csv.NewReader(file)
-    reader.Comma=','
-    reader.Comment=0
-    reader.FieldsPerRecord=1
-    reader.LazyQuotes=false
-    reader.TrimLeadingSpace=true
-    reader.ReuseRecord=true
-    lines,err=reader.ReadAll()
-    file.Close()
+    file,err=os.Open(nodeFile)
+    defer file.Close()
     if err!=nil {
-        fmt.Println("ERROR: "+nodeFile+" "+err.Error())
+        fmt.Println("ERROR: "+err.Error())
     } else {
-        for _,line=range lines {
-            if !IsInSucc(succ,line[0]) {
-                fmt.Println("WARNING: "+line[0]+" in "+nodeFile+" but not in network")
-            } else if !IsInPath(nodes,line[0]) {
-                nodes=append(nodes,line[0])
+        reader=csv.NewReader(file)
+        reader.Comma='\t'
+        reader.Comment=0
+        reader.FieldsPerRecord=1
+        reader.LazyQuotes=false
+        reader.TrimLeadingSpace=true
+        reader.ReuseRecord=true
+        lines,err=reader.ReadAll()
+        if err!=nil {
+            fmt.Println("ERROR: "+err.Error())
+        } else {
+            for _,line=range lines {
+                if !IsInNetwork(nodeSucc,line[0]) {
+                    fmt.Println("WARNING: "+line[0]+" not in network")
+                } else if !IsInList(nodes,line[0]) {
+                    nodes=append(nodes,line[0])
+                }
             }
         }
     }
     return nodes
 }
-func WriteNetwork(networkFile string,paths [][]string,edges map[string]map[string]string) {
+func WriteNetwork(networkFile string,edges [][]string,edgeNames map[string]map[string]string) {
     var (
-        i int
-        path,line []string
+        err error
+        edge []string
         lines [][]string
-        writer *csv.Writer
         file *os.File
+        writer *csv.Writer
     )
     fmt.Println("writing "+networkFile)
-    for _,path=range paths {
-        for i=0;i<len(path)-1;i++ {
-            line=[]string{path[i],edges[path[i]][path[i+1]],path[i+1]}
-            if !IsInPaths(lines,line) {
-                lines=append(lines,CopyPath(line))
-            }
+    file,err=os.Create(networkFile)
+    defer file.Close()
+    if err!=nil {
+        fmt.Println("ERROR: "+err.Error())
+    } else {
+        for _,edge=range edges {
+            lines=append(lines,[]string{edge[0],edgeNames[edge[0]][edge[1]],edge[1]})
         }
+        writer=csv.NewWriter(file)
+        writer.Comma='\t'
+        writer.UseCRLF=false
+        writer.WriteAll(lines)
     }
-    file,_=os.Create(networkFile)
-    writer=csv.NewWriter(file)
-    writer.Comma='\t'
-    writer.UseCRLF=false
-    writer.WriteAll(lines)
-    file.Close()
 }
