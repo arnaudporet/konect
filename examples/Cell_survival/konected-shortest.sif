@@ -1,0 +1,84 @@
+RELA	expression_GErel	BIRC3
+RELA	expression_GErel	BIRC2
+RELA	expression_GErel	XIAP
+RELA	expression_GErel	BIRC5
+RELA	expression_GErel	TRAF2
+NFKB1	expression_GErel	XIAP
+NFKB1	expression_GErel	BIRC5
+NFKB1	expression_GErel	TRAF2
+NFKB1	expression_GErel	BIRC3
+NFKB1	expression_GErel	BIRC2
+BIRC2	inhibition_PPrel	CASP3
+MAPK9	phosphorylation_PPrel	TP53
+APAF1	activation_PPrel	CASP9
+IGF1	activation_PPrel	ERBB3
+BIRC3	inhibition_PPrel	CASP3
+STK4	activation_PPrel,phosphorylation_PPrel	FOXO6
+STK4	activation_PPrel,phosphorylation_PPrel	FOXO1
+STK4	activation_PPrel,phosphorylation_PPrel	FOXO3
+STK4	activation_PPrel,phosphorylation_PPrel	FOXO4
+ERBB3	activation_PPrel	PIK3CA
+MAPK8	phosphorylation_PPrel	TP53
+MAP2K4	phosphorylation_PPrel,activation_PPrel	MAPK9
+MAP2K4	phosphorylation_PPrel,activation_PPrel	MAPK10
+MAP2K4	phosphorylation_PPrel,activation_PPrel	MAPK8
+MAPK10	phosphorylation_PPrel	TP53
+FOXO1	expression_GErel	ATM
+AKT3	activation_PPrel,phosphorylation_PPrel	MDM2
+AKT3	inhibition_PPrel,phosphorylation_PPrel	CASP9
+AKT3	activation_PPrel,phosphorylation_PPrel	IKBKB
+AKT3	activation_PPrel,phosphorylation_PPrel	CHUK
+AKT3	activation_PPrel,phosphorylation_PPrel	IKBKG
+PIK3CA	compound_PPrel,phosphorylation_PPrel,indirect effect_PPrel	AKT2
+PIK3CA	compound_PPrel,phosphorylation_PPrel,indirect effect_PPrel	AKT3
+PIK3CA	compound_PPrel,phosphorylation_PPrel,indirect effect_PPrel	AKT1
+XIAP	inhibition_PPrel	CASP3
+ATM	activation_PPrel,phosphorylation_PPrel	TP53
+FOXO4	expression_GErel	ATM
+CASP9	activation_PPrel	CASP3
+MDM2	inhibition_PPrel	TP53
+IKBKB	activation_PPrel,phosphorylation_PPrel	NFKBIA
+TRAF2	activation_PPrel	PIK3CA
+FOXO6	expression_GErel	ATM
+AKT1	inhibition_PPrel,phosphorylation_PPrel	CASP9
+AKT1	activation_PPrel,phosphorylation_PPrel	IKBKB
+AKT1	activation_PPrel,phosphorylation_PPrel	CHUK
+AKT1	activation_PPrel,phosphorylation_PPrel	IKBKG
+AKT1	activation_PPrel,phosphorylation_PPrel	MDM2
+IGFBP3	inhibition_PPrel	IGF1
+NFKBIA	dissociation_PPrel	NFKB1::RELA
+NFKBIA	dissociation_PPrel	RELA
+NFKBIA	dissociation_PPrel	NFKB1
+AKT2	activation_PPrel,phosphorylation_PPrel	MDM2
+AKT2	inhibition_PPrel,phosphorylation_PPrel	CASP9
+AKT2	activation_PPrel,phosphorylation_PPrel	IKBKB
+AKT2	activation_PPrel,phosphorylation_PPrel	CHUK
+AKT2	activation_PPrel,phosphorylation_PPrel	IKBKG
+CASP3	activation_PPrel	MAP3K1
+CASP3	activation_PPrel	PAK1
+CASP3	activation_PPrel	PAK2
+CASP3	activation_PPrel	STK4
+BIRC5	inhibition_PPrel	CASP3
+MAP2K7	phosphorylation_PPrel,activation_PPrel	MAPK9
+MAP2K7	phosphorylation_PPrel,activation_PPrel	MAPK10
+MAP2K7	phosphorylation_PPrel,activation_PPrel	MAPK8
+PAK1	indirect effect_PPrel	MAP2K4
+PAK1	indirect effect_PPrel	MAP2K7
+BBC3	expression_GErel	TP53
+IKBKG	activation_PPrel,phosphorylation_PPrel	NFKBIA
+CHUK	activation_PPrel,phosphorylation_PPrel	NFKBIA
+MAP3K1	phosphorylation_PPrel	MAP2K4
+MAP3K1	phosphorylation_PPrel	CHUK
+MAP3K1	phosphorylation_PPrel	IKBKB
+MAP3K1	phosphorylation_PPrel	IKBKG
+PAK2	indirect effect_PPrel	MAP2K4
+PAK2	indirect effect_PPrel	MAP2K7
+FOXO3	expression_GErel	ATM
+TP53	expression_GErel	APAF1
+TP53	expression_GErel	IGFBP3
+TP53	expression_GErel	MDM2
+TP53	expression_GErel	BBC3
+NFKB1::RELA	expression_GErel	BIRC3
+NFKB1::RELA	expression_GErel	BIRC2
+NFKB1::RELA	expression_GErel	XIAP
+NFKB1::RELA	expression_GErel	TRAF2

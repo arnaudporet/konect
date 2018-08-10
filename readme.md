@@ -42,7 +42,9 @@ Arguments:
 * `sourceFile`: the source nodes listed in a file (one node per line)
 * `targetFile`: the target nodes listed in a file (one node per line)
 
-The returned file is a SIF file encoding the paths connecting the source nodes to the target nodes in the network.
+The returned file `konected.sif` is a SIF file encoding all the paths connecting the source nodes to the target nodes in the network."
+
+The returned file `konected-shortest.sif` is a SIF file encoding only the shortest connecting paths contained in `konected.sif`.
 
 ## Cautions
 
@@ -55,26 +57,44 @@ The returned file is a SIF file encoding the paths connecting the source nodes t
 
 All the networks used in these examples are adapted from pathways coming from [KEGG Pathway](https://www.genome.jp/kegg/pathway.html).
 
-* Cell cycle
-    * `konect Cell_cycle.sif nodes.txt nodes.txt`
-    * networkFile: the cell cycle (650 edges)
-    * sourceFile: contains the node RB1
-    * targetFile=sourceFile: for getting paths connecting RB1 to itself
-    * result: konected.sif (84 edges), also in svg for visualization
-
 * ErbB signaling pathway
     * `konect ErbB_signaling_pathway.sif sources.txt targets.txt`
     * networkFile: the ErbB signaling pathway (239 edges)
     * sourceFile: contains the nodes EGFR (i.e. ERBB1), ERBB2, ERBB3 and ERBB4
     * targetFile: contains the node MTOR
-    * result: konected.sif (83 edges), also in svg for visualization
+    * results:
+        * konected.sif (83 edges), also in svg for visualization
+        * konected-shortest.sif (50 edges), also in svg for visualization
 
 * Insulin signaling pathway
     * `konect Insulin_signaling_pathway.sif sources.txt targets.txt`
     * networkFile: the insulin signaling pathway (407 edges)
     * sourceFile: contains the node INSR
     * targetFile: contains the nodes GSK3B and MAPK1
-    * result: konected.sif (69 edges), also in svg for visualization
+    * results:
+        * konected.sif (69 edges), also in svg for visualization
+        * konected-shortest.sif (69 edges), also in svg for visualization
+
+* Cell cycle
+    * `konect Cell_cycle.sif nodes.txt nodes.txt`
+    * networkFile: the cell cycle (650 edges)
+    * sourceFile: contains the node RB1
+    * targetFile=sourceFile: for getting the paths connecting RB1 to itself
+    * results:
+        * konected.sif (84 edges), also in svg for visualization
+        * konected-shortest.sif (22 edges), also in svg for visualization
+
+* Cell survival
+    * to illustrate the advantage of also computing the shortest connecting paths, this example is voluntarily bigger
+    * it is made of the following KEGG pathways: Apoptosis, Cell cycle, p53 signaling pathway, ErbB signaling pathway, TNF signaling pathway, TGF-beta signaling pathway, FoxO signaling pathway, Calcium signaling pathway, MAPK signaling pathway, PI3K-Akt signaling pathway and NF-kappa B signaling pathway
+    * these pathways are involved in the cell growth/cell death balance
+    * `konect Cell_survival.sif nodes.txt nodes.txt`
+    * networkFile: some cell survival signaling pathways (11147 edges)
+    * sourceFile: contains the nodes CASP3 (cell death effector), PIK3CA (involved in growth promoting signaling pathways) and TP53 (tumor suppressor)
+    * targetFile=sourceFile: to see how these nodes interact with each other
+    * results:
+        * konected.sif (819 edges), also in svg for a quite challenging visualization
+        * konected-shortest.sif (84 edges), also in svg for an easier visualization but only of the shortest connecting paths
 
 ## Forthcoming
 
