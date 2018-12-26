@@ -42,14 +42,14 @@ Arguments:
 * `sourceFile`: the source nodes listed in a file (one node per line)
 * `targetFile`: the target nodes listed in a file (one node per line)
 
-The returned file `konected.sif` is a SIF file encoding all the paths connecting the source nodes to the target nodes in the network."
+The returned file `konected.sif` is a SIF file encoding all the paths connecting the source nodes to the target nodes in the network.
 
 The returned file `konected-shortest.sif` is a SIF file encoding only the shortest connecting paths contained in `konected.sif`.
 
 ## Cautions
 
-* konect does not handle multi-graphs (i.e. networks where nodes can be connected by more than one edge)
-* note that if a network contains duplicated edges then it is a multi-graph
+* konect does not handle multi-edges (i.e. two or more edges having the same source node and the same target node)
+* note that duplicated edges are multi-edges
 * the network must be provided as a SIF file (see above)
 * in the files containing the node lists (see above): one node per line
 
